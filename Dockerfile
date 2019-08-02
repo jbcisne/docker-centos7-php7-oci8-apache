@@ -2,13 +2,8 @@ FROM centos:7
 
 MAINTAINER Juliano Buzanello <jbcisne@gmail.com>
 
-#
-# Import the Centos-6 RPM GPG key to prevent warnings and Add EPEL Repository
-#
-
-
 RUN yum -C install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
-        http://rpms.famillecollet.com/enterprise/7/remi/x86_64/remi-release-7.5-2.el7.remi.noarch.rpm \
+        http://rpms.famillecollet.com/enterprise/7/remi/x86_64/remi-release-7.6-2.el7.remi.noarch.rpm \
     && rm -rf /var/cache/yum/* \
     && rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7 /etc/pki/rpm-gpg/RPM-GPG-KEY-remi /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 
@@ -49,7 +44,7 @@ RUN yum install -y git \
     && echo 'date.timezone=America/Sao_Paulo' > /etc/php.d/00-docker-php-date-timezone.ini \
     && yum -y update bash
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
 #
 # Instalando instantclient da oracle
